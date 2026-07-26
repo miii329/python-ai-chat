@@ -10,8 +10,14 @@ from google.genai import types
 def main():
     load_dotenv()
 
-    api_key = os.getenv("GEMINI_API_KEY")
-    model_name = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+    api_key = st.secrets.get(
+    "GEMINI_API_KEY",
+    os.getenv("GEMINI_API_KEY"),
+    )
+    model_name = st.secrets.get(
+    "GEMINI_MODEL",
+    os.getenv("GEMINI_MODEL", "gemini-3.5-flash"),
+    )
 
     if not api_key:
         st.error(
